@@ -14,30 +14,30 @@ namespace AspNetWebApiRest.Controllers
         private static List<CustomListItem> _listItems { get; set; } = new List<CustomListItem>();
 
         //GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "1", "2", "3" };
-        }
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "1", "2", "3", "4" };
+        //}
 
-        public string Get(int id)
+        public string Get(string id)
         {
             string s;
             switch (id)
             {
-                case 1:
-                    s = "1";
+                case "111-22-3333":
+                    s = "ssn:111-22-3333, mrn:101, beneficiary:none, prescription:tylenol";
                     break;
-                case 2:
-                    s = "2";
+                case "555-66-7777":
+                    s = "ssn:555-66-7777, mrn:102, beneficiary:spouse, prescription:asprin";
                     break;
-                case 3:
-                    s = "3";
+                case "888-99-0000":
+                    s = "ssn:888-99-0000, mrn:103, beneficiary:children, prescription:ibuprofen:";
                     break;
-                case 4:
-                    s = "4";
+                case "123-45-6789":
+                    s = "ssn:123-45-6789, mrn:104, beneficiary:parents, prescription:none";
                     break;
                 default:
-                    s = "0";
+                    s = "medical record not found";
                     break;
             }
             return s;
