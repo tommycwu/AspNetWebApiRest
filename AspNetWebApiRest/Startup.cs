@@ -17,10 +17,10 @@ namespace AspNetWebApiRest
         {
             //var authority = "https://{yourOktaDomain}/oauth2/default";
             var oktaAudience = ConfigurationManager.AppSettings["OktaAudience"];
-            var oktaAuthority = ConfigurationManager.AppSettings["OktaAuthority"];
+            var oktaIssuer = ConfigurationManager.AppSettings["oktaIssuer"];
 
             var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
-               oktaAuthority + "/.well-known/openid-configuration",
+               oktaIssuer + "/.well-known/openid-configuration",
                new OpenIdConnectConfigurationRetriever(),
                new HttpDocumentRetriever());
             var discoveryDocument = Task.Run(() => configurationManager.GetConfigurationAsync()).GetAwaiter().GetResult();
@@ -32,7 +32,7 @@ namespace AspNetWebApiRest
                    TokenValidationParameters = new TokenValidationParameters()
                    {
                        ValidAudience = oktaAudience,
-                       ValidIssuer = oktaAuthority,
+                       ValidIssuer = oktaIssuer,
                        IssuerSigningKeyResolver = (token, securityToken, identifier, parameters) =>
                        {
                            return discoveryDocument.SigningKeys;
